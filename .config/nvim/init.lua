@@ -2,9 +2,11 @@ require('plugins-init')
 require('keymaps')
 require('completion')
 require('lsp')
-require("plugins/lualine")
-require("mason").setup()
-require("ibl").setup()
+require('plugins/lualine')
+require('plugins/telescope')
+require('mason').setup()
+require('ibl').setup()
+require('alpha').setup(require('alpha.themes.startify').config)
 
 -- GUI
 vim.opt.title = true
@@ -17,15 +19,6 @@ vim.opt.encoding = 'utf-8'
 vim.opt.relativenumber = true
 vim.g.foldmethod = 'marker'
 
--- Devicons (NERDTree icons.)
-vim.g.DevIconsEnableFoldersOpenClose = 1
-vim.g.WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ""
-vim.g.DevIconsDefaultFolderOpenSymbol = ''
-vim.g.WebDevIconsNerdTreeAfterGlyphPadding = '  '
-
--- Changing nertree folder highlight color:
-vim.g.WebDevIconsDefaultFolderSymbolColor = "F5C06F"
-vim.g.WebDevIconsDefaultOpenFolderSymbolColor = "F5C06F"
 -- Tabs and Indents
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -93,8 +86,6 @@ autocmd('VimLeave', {pattern = '*.tex', command = "!texclear %"})
 autocmd('TermOpen', {pattern = '', command = 'startinsert'})
 autocmd('BufWinEnter', {pattern = 'term://*', command = 'startinsert'})
 autocmd({'WinEnter', 'BufLeave'}, {pattern = 'term://*', command = 'startinsert'})
--- NERDTree Auto close
-autocmd('bufenter', {pattern = '', command = 'if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif'})
 -- Reload after saving configs
 autocmd('BufWritePost', {pattern = {'Xresources','Xdefaults','xresources','xdefaults'}, command = '!xrdb %'})
 

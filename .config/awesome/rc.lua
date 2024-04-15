@@ -292,7 +292,7 @@ globalkeys = gears.table.join(
               {description = "open a terminal", group = "applications"}),
     awful.key({ modkey,           }, "d", function () awful.spawn("zathura") end,
               {description = "open Zathura", group = "applications"}),
-	awful.key({ modkey,			  }, "w", function () awful.util.spawn("librewolf") end,
+	awful.key({ modkey,			  }, "w", function () awful.util.spawn("brave") end,
 			  {description = "open librewolf", group = "applications"}),
 	awful.key({ modkey,			  }, "e", function () awful.spawn("kitty -e nv") end,
 			  {description = "open neovim", group = "applications"}),
@@ -564,10 +564,13 @@ end)
 -- }}}
 
 -- {{{ Autorun programs
-autorun = true
-autorunApps =
+local autorun = true
+local autorunApps =
 {
+	-- compositor (adds pretty window rounding and blur.)
    "picom -b",
+   -- hides cursor after 2 seconds idle
+   "unclutter -idle 2 -root &",
 }
 if autorun then
    for app = 1, #autorunApps do

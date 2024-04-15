@@ -12,18 +12,23 @@
 local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.config/nvim/plugged')
 
+-- Framework and API
+Plug 'nvim-lua/plenary.nvim'
+
 -- Theme
 Plug 'folke/tokyonight.nvim'
 
+-- Navigation and Project Management
+Plug ( 'nvim-telescope/telescope.nvim', {['tag']='0.1.6'} )
+Plug 'goolord/alpha-nvim'
+
 -- UI Related
-Plug 'ap/vim-css-color'	-- Hex color previews
-Plug 'preservim/nerdtree'	-- File browser for nvim
 Plug 'nvim-lualine/lualine.nvim'-- Status bar
 Plug 'ryanoasis/vim-devicons'	-- Pretty icons
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight' -- Syntax highlighting for nerdtree icons
 Plug 'lukas-reineke/indent-blankline.nvim'	-- sexy indents
 Plug ('nvim-treesitter/nvim-treesitter', {['do'] = vim.fn['TSUpdate']})
 Plug 'fladson/vim-kitty' -- Syntax highlighting for kitty config
+Plug 'nvim-tree/nvim-web-devicons'
 
 -- Vsnip
 Plug 'hrsh7th/cmp-vsnip'
@@ -46,7 +51,6 @@ Plug 'tpope/vim-commentary' -- allows for rapid line commenting
 Plug 'tpope/vim-surround'	-- easily change surrounding syntax e.g. () '' {} []
 
 -- Project Productivity Tools
-Plug 'lervag/vimtex'	-- toolset for live compilation of laTex markup
 Plug 'williamboman/mason.nvim'	-- package manager for neovim
 Plug 'williamboman/mason-lspconfig.nvim'	-- LSP integration for mason
 
