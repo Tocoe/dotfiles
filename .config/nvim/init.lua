@@ -17,7 +17,8 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.encoding = 'utf-8'
 vim.opt.relativenumber = true
-vim.g.foldmethod = 'marker'
+
+vim.opt.hlsearch = false
 
 -- Tabs and Indents
 vim.opt.tabstop = 4

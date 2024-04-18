@@ -55,9 +55,10 @@ end
 
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), "sugarglass"))
 
--- This is used later as the default terminal and editor to run.
-terminal = "kitty"
-editor = os.getenv("EDITOR") or "nv"
+-- Progran defaults sourced from environment vars
+terminal = os.getenv("TERMINAL")
+browser = os.getenv("BROWSER")
+editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -292,10 +293,10 @@ globalkeys = gears.table.join(
               {description = "open a terminal", group = "applications"}),
     awful.key({ modkey,           }, "d", function () awful.spawn("zathura") end,
               {description = "open Zathura", group = "applications"}),
-	awful.key({ modkey,			  }, "w", function () awful.util.spawn("brave") end,
-			  {description = "open librewolf", group = "applications"}),
-	awful.key({ modkey,			  }, "e", function () awful.spawn("kitty -e nv") end,
-			  {description = "open neovim", group = "applications"}),
+	awful.key({ modkey,			  }, "w", function () awful.util.spawn(browser) end,
+			  {description = "open browser", group = "applications"}),
+	awful.key({ modkey,			  }, "e", function () awful.spawn(editor_cmd) end,
+			  {description = "open editor", group = "applications"}),
 
     -- Standard program
     awful.key({ modkey, "Control" }, "r", awesome.restart,
