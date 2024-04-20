@@ -1,0 +1,4 @@
+#! /bin/sh
+
+# Use bluetoothctl to connect to paired device
+echo -e 'power on\nconnect \t \nquit' | bluetoothctl

@@ -10,14 +10,13 @@ fi
 
 # Directory shortcut aliases
 alias bin="cd $HOME/.local/bin"
-alias cfg="cd $HOME/.config"
 
 # FZF styling
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 	--color=fg:#a9b1d6,fg+:#ced8ff,bg:#1a1b26,bg+:#1a1b26
 	--color=hl:#9ece6a,hl+:#b0e27c,info:#7aa2f7,marker:#7dcfff
 	--color=prompt:#9ece6a,spinner:#7dcfff,pointer:#e0af68,header:#e0af68
-	--color=border:#c0caf5,label:#7aa2f7,query:#9ece6a
+	--color=border:#c0caf5,label:#e0af68,query:#9ece6a
 	--border="rounded" --border-label="" --preview-window="border-rounded" --prompt="  "
 	--marker="󰐃" --pointer=" " --separator="" --scrollbar=""
 	--layout="reverse" --info="right"

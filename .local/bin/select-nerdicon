@@ -1,0 +1,7 @@
+#! /bin/sh
+
+# WIP version that hides the icon names, but still indexes them for searching
+#cat $HOME/.local/bin/nerdicons.txt | awk '{print $1" "}'|dmenu -c -g 10 -l 8 -fn 'Open Sans-30'
+
+# Placeholder version
+cat $HOME/.local/bin/nerdicons.txt | dmenu -c -g 2 -l 8 -fn 'Iosevka Nerd Font-20'
