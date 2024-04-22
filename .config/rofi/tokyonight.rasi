@@ -1,0 +1,113 @@
+// Colorscheme and Fonts
+* {
+    font: 				"sans semi-bold 20";
+    background-color: 	transparent;
+
+	// Neutrals
+	bg: 	#1f2335;
+    bgt: 	#1f233580;
+	fg: 	#c0caf5;
+	medium:	#3b4261;
+	light: 	#737aa2;
+
+	// Colors
+	blue:	#7aa2f7;
+	purple:	#bb9af7;
+	lime:	#73daca;
+}
+
+// window (lowest level, background.)
+window {
+    width:				700;
+	padding:			10px;
+    orientation:		horizontal;
+    location: 			center;
+    anchor:				center;
+	background-color: 	@bgt;
+    transparency: 		"real";
+    border-radius: 		20px;
+	border-color:		@lime;
+	border:				4px;
+    children: 			[ mainbox ];
+}
+
+// I don't generally style this whatsoever.
+mainbox {
+    children: [ inputbar, message, listview ];
+}
+
+entry, prompt, case-indicator {
+    text-font:			inherit;
+    text-color: 		inherit;
+}
+
+// The input bar, remains the same for most of all styles.
+inputbar {
+    color:				@bg;
+	background-color:	@fg;
+    padding:			10px;
+    border-radius:		20px;
+}
+
+prompt {
+	padding: 0px 0px 0px 5px;
+}
+
+message {
+}
+
+entry {
+    cursor:				pointer;
+}
+
+listview {
+	padding: 10px 0px 10px 0px ;
+    layout:				vertical;
+    lines: 				7;
+    dynamic: 			false;
+}
+
+element {
+    vertical-align: 	1;
+	padding: 			10px;
+    border-radius: 		20px;
+    color: 				@blue;
+    font:				inherit;
+}
+
+element-text {
+    background-color:	inherit;
+    text-color:			inherit;
+    vertical-align:	0.5;
+}
+
+element selected.normal {
+    background-color:	@medium;
+	text-color:			@fg;
+}
+
+element normal active {
+}
+
+element-icon {
+    background-color:	inherit;
+    text-color:			inherit;
+    size:				1em;
+}
+
+element normal urgent {
+    background-color:	@bg;
+}
+
+element selected active {
+}
+
+button {
+    padding:			6px;
+    color:				@bg;
+    horizonatal-align:	0.5;
+    border-radius: 4px 0px 0px 4px;
+}
+
+button selected normal {
+}
