@@ -1,113 +1,142 @@
-// Colorscheme and Fonts
+/****----	COLORSCHEME AND FONTS	----****/
 * {
     font: 				"sans semi-bold 20";
     background-color: 	transparent;
 
 	// Neutrals
-	bg: 	#1f2335;
-    bgt: 	#1f233580;
-	fg: 	#c0caf5;
-	medium:	#3b4261;
-	light: 	#737aa2;
+	bg: 					#1f2335;
+    bgt: 					#1f233580;
+	fg: 					#c0caf5;
+	medium:					#3b4261;
+	light: 					#737aa2;
 
 	// Colors
-	blue:	#7aa2f7;
-	purple:	#bb9af7;
-	lime:	#73daca;
+	blue:					#7aa2f7;
+	purple:					#bb9af7;
+	lime:					#73daca;
+	orange:  				#ff9e64;
 }
 
-// window (lowest level, background.)
+/****----	WINDOW	----****/
 window {
-    width:				700;
-	padding:			10px;
-    orientation:		horizontal;
-    location: 			center;
-    anchor:				center;
-	background-color: 	@bgt;
-    transparency: 		"real";
-    border-radius: 		20px;
-	border-color:		@lime;
-	border:				4px;
-    children: 			[ mainbox ];
+	padding:				10px;
+    orientation:			horizontal;
+    location: 				center;
+    anchor:					center;
+	background-color: 		@bgt;
+    transparency: 			"real";
+    border-radius: 			20px;
+	border-color:			@lime;
+	border:					4px;
+    children: 				[ "mainbox" ];
+	width:					500px;
 }
 
-// I don't generally style this whatsoever.
 mainbox {
-    children: [ inputbar, message, listview ];
+    children: [ "textbox-custom", "message", "inputbar", "listview" ];
 }
 
-entry, prompt, case-indicator {
-    text-font:			inherit;
-    text-color: 		inherit;
-}
-
-// The input bar, remains the same for most of all styles.
+/****----	INPUT BAR	----****/
 inputbar {
-    color:				@bg;
-	background-color:	@fg;
-    padding:			10px;
-    border-radius:		20px;
+	enabled:				true;
+    color:					@bg;
+	background-color:		@fg;
+    padding:				10px;
+    border-radius:			20px;
+	children:				[ "prompt", "textbox-prompt-colon", "entry"];
+}
+
+textbox-prompt-colon {
+    enabled:				true;
+    expand:					false;
+    vertical-align:         0.5;
+    horizontal-align:       0.5;
+    str:					"󰌧";
+    padding:				0px 15px;
+	font:					"monospace 30";
+    border-radius:			0px;
+    background-color:		@fg;
+    text-color:				@bg;
 }
 
 prompt {
-	padding: 0px 0px 0px 5px;
-}
-
-message {
+    enabled:                false;
+    vertical-align:         0.5;
+    horizontal-align:       0.5;
+    background-color:       @fg;
+    text-color:             @bg;
 }
 
 entry {
-    cursor:				pointer;
+    enabled:				true;
+	padding:				0px 15px;
+    vertical-align:         0.5;
+    horizontal-align:       0.0;
+    background-color:		inherit;
+    text-color:				inherit;
+    cursor:					text;
+    placeholder:			"Search...";
+    placeholder-color:		@light;
 }
 
+/****----	LIST OF ELEMENTS	----****/
 listview {
-	padding: 10px 0px 10px 0px ;
-    layout:				vertical;
-    lines: 				7;
-    dynamic: 			false;
+	padding: 				10px 0px 0px 0px;
+    lines: 					5;
 }
 
 element {
-    vertical-align: 	1;
-	padding: 			10px;
-    border-radius: 		20px;
-    color: 				@blue;
-    font:				inherit;
-}
-
-element-text {
-    background-color:	inherit;
-    text-color:			inherit;
-    vertical-align:	0.5;
-}
-
-element selected.normal {
-    background-color:	@medium;
-	text-color:			@fg;
-}
-
-element normal active {
+    border-radius: 			20px;
+    color: 					@fg;
+    font:					inherit;
+	children:				[element-icon, element-text ];
 }
 
 element-icon {
-    background-color:	inherit;
-    text-color:			inherit;
-    size:				1em;
+	size: 50px;
+	padding: 10px;
+    vertical-align:         0.5;
+}
+
+element-text {
+	font:					inherit;
+    text-color:				inherit;
+    vertical-align:         0.5;
+}
+
+element selected.normal {
+    background-color:		@purple;
+	text-color:				@bg;
 }
 
 element normal urgent {
-    background-color:	@bg;
+    background-color:		@bg;
 }
 
-element selected active {
+/****----	 MESSAGE	----****/
+message {
+    enabled:                true;
+    margin:                 0px;
+    padding:                10px;
+    expand:					false;
 }
 
-button {
-    padding:			6px;
-    color:				@bg;
-    horizonatal-align:	0.5;
-    border-radius: 4px 0px 0px 4px;
+textbox {
+	enabled:				true;
+    font:					"sans 25";
+    text-color:             @orange;
+	content:				"";
+    vertical-align:         0.5;
+    horizontal-align:       0.5;
+    expand:					false;
 }
 
-button selected normal {
+textbox-custom {
+	enabled:				false;
+    font:					"sans bold 40";
+    text-color:             @fg;
+	content:				"PLACEHOLDER";
+    vertical-align:         0.5;
+    horizontal-align:       0.0;
+    expand:					false;
 }

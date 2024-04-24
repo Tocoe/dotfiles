@@ -288,6 +288,10 @@ globalkeys = gears.table.join(
 	awful.key({}, "#233", function () awful.util.spawn("xbacklight -inc 10") end,
 			  {description = "Increase backlight brightness by 10%", group = "system"}),
 
+    -- Prompt
+    awful.key({ modkey },            "r",     function () awful.spawn("rofi -show drun") end,
+              {description = "run prompt", group = "launcher"}),
+
 	-- Applications
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "applications"}),
@@ -297,6 +301,12 @@ globalkeys = gears.table.join(
 			  {description = "open browser", group = "applications"}),
 	awful.key({ modkey,			  }, "e", function () awful.spawn(editor_cmd) end,
 			  {description = "open editor", group = "applications"}),
+
+	-- Shell Scripts
+	awful.key({ modkey, "Shift" }, "b", function () awful.util.spawn("bookmark-add") end,
+			  {description = "Add web bookmark", group = "scripts"}),
+	awful.key({ modkey,			}, "b", function () awful.util.spawn("bookmark-get") end,
+			  {description = "Add web bookmark", group = "scripts"}),
 
     -- Standard program
     awful.key({ modkey, "Control" }, "r", awesome.restart,
@@ -332,10 +342,6 @@ globalkeys = gears.table.join(
                   end
               end,
               {description = "restore minimized", group = "client"}),
-
-    -- Prompt
-    awful.key({ modkey },            "r",     function () awful.spawn("dmenu") end,
-              {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
               function ()
@@ -456,7 +462,7 @@ awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
       properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
+                     border_color = beautiful.border_focus,
                      focus = awful.client.focus.filter,
                      raise = true,
                      keys = clientkeys,

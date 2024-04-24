@@ -1,0 +1,59 @@
+#! /bin/sh
+
+bmdir=$HOME/documents/bookmarks
+
+keymap_vimium="Shift_L+P"
+keymap_using=""
+browser_using=""
+
+rofi_cmd () {
+	cat $bmdir/* | \
+	rofi 	-dmenu \
+			-no-custom \
+			-i \
+			-display-columns 1,2 \
+			-async-pre-read \
+			-theme-str 'textbox-custom {content: "Bookmarks";}' \
+			-theme styles/generic-search.rasi
+}
+
+find_browser () {
+	# Brave
+	local braveID=$(xdotool search --onlyvisible --limit 1 --class "Brave-browser")
+	if [ ! -z $braveID ]; then
+		browser_using=$braveID
+		keymap_using=$keymap_vimium
+		return
+	fi
+}
+
+input_browser () {
+	# store current clipboard
+	prevcb=$(xclip -o -selection clipboard)
+	# put URL into clipboard
+	xclip -o | xclip -selection clipboard
+
+	# Paste into browser
+	xdotool windowfocus --sync $browser_using
+	sleep 0.1
+	xdotool key --clearmodifiers $keymap_using
+	sleep 0.1 && xdotool keyup Super_L
+
+	# restore previous clipboard
+	echo $prevcb | xclip -selection clipboard
+}
+
+# Getting URL from using selection via rofi, exit elegantly if no selection is made
+url=$(rofi_cmd | awk -F"\t" '{print $4}')
+[ -z $url ] && exit 1
+
+find_browser
+# If browser is available, use xclip to paste into browser directly
+# This method restores the original system clipboard
+if [ $browser_using ]; then
+	echo $url | xclip
+	input_browser
+# Else, just output to system clipboard
+else
+	echo $url | xclip -selection clipboard
+fi

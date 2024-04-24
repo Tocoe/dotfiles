@@ -27,8 +27,11 @@ Plug 'nvim-lualine/lualine.nvim'-- Status bar
 Plug 'ryanoasis/vim-devicons'	-- Pretty icons
 Plug 'lukas-reineke/indent-blankline.nvim'	-- sexy indents
 Plug ('nvim-treesitter/nvim-treesitter', {['do'] = vim.fn['TSUpdate']})
+
+-- Highlights, linting and UNICODE
 Plug 'fladson/vim-kitty' -- Syntax highlighting for kitty config
 Plug 'nvim-tree/nvim-web-devicons'
+Plug 'brenoprata10/nvim-highlight-colors'
 
 -- Vsnip
 Plug 'hrsh7th/cmp-vsnip'

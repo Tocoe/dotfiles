@@ -7,6 +7,7 @@ require('plugins/telescope')
 require('mason').setup()
 require('ibl').setup()
 require('alpha').setup(require('alpha.themes.startify').config)
+require('nvim-highlight-colors').setup({})
 
 -- GUI
 vim.opt.title = true
@@ -74,6 +75,14 @@ vim.g.vimtex_view_method = "zathura"
 -- Autocommand Definitions (just to be tidy.)
 local augroup = vim.api.nvim_create_augroup		-- Create/get autocommand group
 local autocmd = vim.api.nvim_create_autocmd		-- Create autocommand
+
+
+-- Change opacity (For kitty terminal only.)
+autocmd('VimEnter', {	pattern = '',
+						command = "silent !if [ $KITTY_WINDOW_ID ]; then kitty @ --to $KITTY_LISTEN_ON set-background-opacity 1; fi"})
+
+autocmd('VimLeave', {	pattern = '',
+						command = "silent !if [ $KITTY_WINDOW_ID ]; then kitty @ --to $KITTY_LISTEN_ON set-background-opacity 0.7; fi"})
 
 -- Use system clipboard as default yank/paste buffer
 vim.opt.clipboard = 'unnamedplus'

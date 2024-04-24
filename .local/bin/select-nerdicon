@@ -1,7 +1,21 @@
 #! /bin/sh
 
-# WIP version that hides the icon names, but still indexes them for searching
-#cat $HOME/.local/bin/nerdicons.txt | awk '{print $1" "}'|dmenu -c -g 10 -l 8 -fn 'Open Sans-30'
+# This script implements rofi to search through all nerd font icons.
+# Once the user has selected an icon, it dumps it to STDOUT.
 
-# Placeholder version
-cat $HOME/.local/bin/nerdicons.txt | dmenu -c -g 2 -l 8 -fn 'Iosevka Nerd Font-20'
+# File with all nerd icons tab seperated by their names
+icons="$HOME/.local/bin/nerdicons.txt"
+
+## Opens rofi prompt with all nerd icons
+rofi_cmd () {
+	rofi 	-dmenu \
+			-no-custom \
+			-i \
+			-display-columns 1 \
+			-input $icons \
+			-async-pre-read \
+			-theme-str 'textbox-prompt-colon {str: "";}' \
+			-theme styles/icon-grid.rasi
+}
+# Awk to remove the name from the selection, grabbing only the icon.
+rofi_cmd | awk '{print $1}'

@@ -10,22 +10,24 @@ local os = os
 local theme                                     = {}
 theme.default_dir                               = require("awful.util").get_themes_dir() .. "default"
 theme.dir                                       = os.getenv("XDG_CONFIG_HOME") .. "/awesome/themes/sugarglass"
-theme.wallpaper                                 = theme.dir .. "/wall.png"
-theme.font                                      = "Open Sans"
+theme.wallpaper                                 = theme.dir .. "/wall.jpg"
+theme.font                                      = "sans semi-bold"
 theme.fg_normal                                 = "#c0caf5"
-theme.fg_focus                                  = "#c0caf5"
-theme.bg_normal                                 = "#24283b"
-theme.bg_focus                                  = "#3a405f"
+theme.fg_focus                                  = ""
+theme.bg_normal                                 = "#1a1b26"
+theme.bg_focus                                  = "#3b4261"
 theme.fg_urgent                                 = ""
 theme.bg_urgent                                 = ""
+
+-- Borders
 theme.border_width                              = dpi(0)
-theme.border_normal                             = "#292e42"
-theme.border_focus                              = "#7aa2f7"
+theme.border_normal                             = "#1a1b26"
+theme.border_focus								= "#bb9af7"
 
 -- Taglist Colors
-theme.taglist_fg_focus                          = "#c0caf5"
-theme.taglist_fg_occupied						= "#57608e"
-theme.taglist_fg_empty							= "#24283b"
+theme.taglist_fg_focus                          = "#b4f9f8"
+theme.taglist_fg_occupied						= "#737aa2"
+theme.taglist_fg_empty							= "#292e42"
 theme.taglist_bg_focus							= ""
 theme.taglist_bg_occupied						= ""
 theme.taglist_bg_empty   						= ""
@@ -43,7 +45,7 @@ theme.awesome_icon                              = theme.dir .."/icons/awesome.pn
 theme.menu_submenu_icon                         = theme.dir .."/icons/submenu.png"
 --theme.taglist_squares_sel                       = theme.dir .. "/icons/square_sel.png"
 --theme.taglist_squares_unsel                     = theme.dir .. "/icons/square_unsel.png"
--- theme.taglist_fg_occupied 						=
+--theme.taglist_fg_occupied 					  =
 theme.useless_gap                               = dpi(8)
 theme.layout_txt_tile                           = "[t]"
 theme.layout_txt_tileleft                       = "[l]"

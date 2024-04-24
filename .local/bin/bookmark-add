@@ -1,0 +1,87 @@
+#! /bin/sh
+
+# This script gathers bookmark data from the user
+# and prints it to a file.
+
+# Useful vars
+bmdir=$HOME/documents/bookmarks
+
+# Find an active brave session on this tag/desktop/workspace
+braveID=$(xdotool search --onlyvisible --limit 1 --class "Brave-browser")
+
+# if brave was found, copy the current url
+# Sleeps are needed as the url copy feature in vimium isn't instantanious
+
+if [ ! -z "$braveID" ]; then
+	xdotool windowfocus --sync $braveID
+	sleep 0.1
+	xdotool key --clearmodifiers y y
+	sleep 0.1 && xdotool keyup Super_L Shift_L
+	url=$(xclip -o)
+
+else
+	# else get url from user
+	url=$( rofi -dmenu \
+				-steal-focus \
+				-no-lazy-grab \
+				-theme-str 'textbox-custom {content: "Bookmark URL:";}' \
+				-theme-str 'entry	{placeholder: "website.com/domain...";}' \
+				-theme styles/input.rasi)
+fi
+
+# URL input validation
+if [ -z $url ]; then
+	rofi -e "No URL provided, terminating." -theme styles/input.rasi
+	exit 1
+fi
+
+# Get name from user
+name=$( rofi -dmenu \
+			-steal-focus \
+			-no-lazy-grab \
+			-theme-str 'textbox-custom	{content:  	"New Bookmark Name:";}' \
+			-theme-str 'entry	{placeholder:	"My Bookmark...";}' \
+			-theme styles/input.rasi)
+
+# Name input validation
+if [ -z $name ]; then
+	rofi -e "No name provided, terminating." -theme styles/input.rasi
+	exit 1
+fi
+
+# Get icon from user
+icon=$(select-nerdicon)
+
+# Icon input validations
+if [ -z $icon ]; then
+	rofi -e "No icon provided, terminating." -theme styles/input.rasi
+	exit 1
+fi
+
+# Get catagory from user
+catagory=$( echo -e "󰉗  New Catagory...\n$(ls -1 $bmdir)"| rofi -dmenu \
+			-theme-str 'textbox-custom			{content: "Catagory:";}' \
+			-theme styles/select-vertical.rasi \
+			-steal-focus \
+			-no-lazy-grab)
+
+# Creating a new catagory
+if [[ $catagory == "󰉗  New Catagory..." ]]; then
+	catagory=$( rofi -dmenu \
+				-theme-str 'textbox-custom			{content: "New Catagory:";}' \
+				-theme-str 'entry					{placeholder: "Cool Websites...";}' \
+				-theme-str 'textbox-prompt-colon	{enabled: true;}' \
+				-theme-str 'textbox-prompt-colon	{str: "󰉗";}' \
+				-theme styles/input.rasi \
+				-steal-focus \
+				-no-lazy-grab)
+fi
+
+# Catagory input validation
+if [ -z $catagory ]; then
+	rofi -e "No catagory provided, terminating." -theme styles/input.rasi
+	exit 1
+fi
+
+echo -e $icon'\t'$name'\t'$catagory'\t'$url >> $bmdir/$catagory
+

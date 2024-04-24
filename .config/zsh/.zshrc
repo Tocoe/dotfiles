@@ -5,9 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# alias nvim to the nvim_wrapper if available
-[ "$(command -v nvim_wrapper)" ] && alias nvim="nvim_wrapper"
-
 # Directory shortcut aliases
 alias bin="cd $HOME/.local/bin"
 
@@ -17,7 +14,7 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 	--color=hl:#9ece6a,hl+:#b0e27c,info:#7aa2f7,marker:#7dcfff
 	--color=prompt:#9ece6a,spinner:#7dcfff,pointer:#e0af68,header:#e0af68
 	--color=border:#c0caf5,label:#e0af68,query:#9ece6a
-	--border="rounded" --border-label="" --preview-window="border-rounded" --prompt="  "
+	--border="rounded" --border-label="" --preview-window="border-rounded" --prompt="  "
 	--marker="󰐃" --pointer=" " --separator="" --scrollbar=""
 	--layout="reverse" --info="right"
 	--height=25%
