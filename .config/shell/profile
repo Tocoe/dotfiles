@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # PATH
-export PATH=$PATH:$HOME/.local/bin:$HOME/.local/bin/shell:$HOME/.local/share/platformio/penv/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/.local/bin/shell:$HOME/.local/share/platformio/penv/bin:$HOME/.local/share/fzy-lua-native
 
 # Default programs
 export EDITOR="nvim"

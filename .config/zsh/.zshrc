@@ -31,10 +31,14 @@ alias psr="pacman -Qsq | fzf --border-label=' 󰮯 󰇘 Pacman 󰇘  ' --header=
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Setting the autocompletion to match the zpty tab complete
-ZSH_AUTOSUGGEST_STRATEGY="completion"
+plugins=(
+	zsh-vi-mode
+	zsh-autocomplete
+	zsh-syntax-highlighting
+)
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -67,7 +71,7 @@ ZSH_AUTOSUGGEST_STRATEGY="completion"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -100,20 +104,25 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+export KEYTIMEOUT=1
+
+# Autcomplete config
+bindkey -r "^K"
+bindkey -r "^L"
+
+bindkey -M viins "^J" menu-select
+bindkey -M viins "^K" menu-select
+bindkey -M menuselect "^J" menu-complete
+bindkey -M menuselect "^K" reverse-menu-complete
+bindkey -M viins "^L" accept-line
+bindkey -M viins "^H" undo
+
+zstyle -e ':autocomplete:*:*' list-lines 'reply=( $(( LINES / 3 )) )'
+zstyle ':autocomplete:*' min-input 3
+

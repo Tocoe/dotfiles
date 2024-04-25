@@ -31,8 +31,5 @@ vim.keymap.set('n','<C-j>', '<ESC><C-w>h', { noremap = false })
 vim.keymap.set('n','<C-k>', '<ESC><C-w>l', { noremap = false })
 
 -- Compiling & File/Project Operations
-vim.keymap.set({'n','v'},'<leader>c', [[:w! \| !compiler "%:p"<CR>]])	-- Compile document (for markup langs.)
 vim.keymap.set('n', '<F3>', ':Autoformat<CR>')	-- Autoformat
-vim.keymap.set('n', '<leader>s', ':!clear && shellcheck -x %<CR>')	-- Shell check
 vim.keymap.set('n', '<leader>o', ':setlocal spell! spelllang=en_au<CR>')	-- Spell check
-vim.keymap.set('n', '<leader>p', ':!opout "%:p"<CR>')	-- Open corresponding .pdf/.html or preview

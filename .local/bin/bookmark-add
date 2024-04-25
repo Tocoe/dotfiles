@@ -15,7 +15,7 @@ braveID=$(xdotool search --onlyvisible --limit 1 --class "Brave-browser")
 if [ ! -z "$braveID" ]; then
 	xdotool windowfocus --sync $braveID
 	sleep 0.1
-	xdotool key --clearmodifiers y y
+	xdotool key --clearmodifiers Escape y y
 	sleep 0.1 && xdotool keyup Super_L Shift_L
 	url=$(xclip -o)
 
@@ -25,7 +25,7 @@ else
 				-steal-focus \
 				-no-lazy-grab \
 				-theme-str 'textbox-custom {content: "Bookmark URL:";}' \
-				-theme-str 'entry	{placeholder: "website.com/domain...";}' \
+				-theme-str 'entry	{placeholder: "website.com/directory...";}' \
 				-theme styles/input.rasi)
 fi
 

@@ -2,7 +2,7 @@
 
 bmdir=$HOME/documents/bookmarks
 
-keymap_vimium="Shift_L+P"
+keymap_vimium="Escape Shift_L+P"
 keymap_using=""
 browser_using=""
 

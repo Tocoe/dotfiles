@@ -29,9 +29,12 @@ Plug 'lukas-reineke/indent-blankline.nvim'	-- sexy indents
 Plug ('nvim-treesitter/nvim-treesitter', {['do'] = vim.fn['TSUpdate']})
 
 -- Highlights, linting and UNICODE
-Plug 'fladson/vim-kitty' -- Syntax highlighting for kitty config
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'brenoprata10/nvim-highlight-colors'
+
+-- Kitty temrinal
+Plug 'fladson/vim-kitty' -- Syntax highlighting for kitty config
+Plug 'mikesmithgh/kitty-scrollback.nvim' -- scrollback grabbing for temrianl
 
 -- Vsnip
 Plug 'hrsh7th/cmp-vsnip'
@@ -39,10 +42,14 @@ Plug 'hrsh7th/vim-vsnip'
 
 -- Autocompletion
 Plug 'hrsh7th/nvim-cmp' -- Completion main plugin
-Plug 'hrsh7th/cmp-cmdline' -- cmdline completion
+
+-- Match and search for Wilder
+Plug 'https://github.com/romgrk/fzy-lua-native'
+Plug 'https://github.com/nixprime/cpsm'
+
 Plug 'hrsh7th/cmp-nvim-lsp' -- Lsp completion
 Plug ('gelguy/wilder.nvim', { as = 'wilder', ['do'] = vim.fn['let &rtp=&rtp UpdateRemotePlugins']})	-- nicer custom wildmenu extension
-Plug ('roxma/nvim-yarp', { ['do'] = vim.fn['pip install -r requirements.txt']})
+Plug ('roxma/nvim-yarp', { ['do']=vim.fn['pip install -r requirements.txt']})
 Plug 'roxma/vim-hug-neovim-rpc'
 
 -- LSP

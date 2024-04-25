@@ -18,3 +18,7 @@ local omnisharp_bin = "/home/joey/.local/share/nvim/mason/packages/omnisharp/Omn
 lspconfig.omnisharp.setup{
     cmd = {"dotnet", omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
 }
+
+-- Bash Lsp
+require'lspconfig'.bashls.setup{}
+
