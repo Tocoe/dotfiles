@@ -36,7 +36,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(
 	zsh-vi-mode
-	zsh-autocomplete
 	zsh-syntax-highlighting
 )
 
@@ -111,18 +110,3 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
 export KEYTIMEOUT=1
-
-# Autcomplete config
-bindkey -r "^K"
-bindkey -r "^L"
-
-bindkey -M viins "^J" menu-select
-bindkey -M viins "^K" menu-select
-bindkey -M menuselect "^J" menu-complete
-bindkey -M menuselect "^K" reverse-menu-complete
-bindkey -M viins "^L" accept-line
-bindkey -M viins "^H" undo
-
-zstyle -e ':autocomplete:*:*' list-lines 'reply=( $(( LINES / 3 )) )'
-zstyle ':autocomplete:*' min-input 3
-
