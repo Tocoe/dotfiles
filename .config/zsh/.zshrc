@@ -37,6 +37,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(
 	zsh-vi-mode
 	zsh-syntax-highlighting
+	colored-man-pages
+	colorize
 )
 
 # Set list of themes to pick from when loading at random
@@ -102,11 +104,28 @@ ENABLE_CORRECTION="true"
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+export KEYTIMEOUT=1
+
+# A few bindkeys for MY CTRL-hjkl vimlike suggestion navigation
+bindkey -M viins -r "^K"
+bindkey -M viins -r "^J"
+bindkey -M viins -r "^H"
+
+# This key is overritten by zvm mode, which is run after .zshrc is sourced
+# So this has to be defined as so.
+zvm_after_init_commands+=('
+	bindkey	-M viins "^K" reverse-menu-complete
+')
+bindkey -M viins "^J" expand-or-complete
+bindkey -M viins "^H" undo
+
+bindkey	-M menuselect "^K" reverse-menu-complete
+bindkey	-M menuselect "^J" expand-or-complete
+bindkey -M menuselect "^L" accept-line
+bindkey -M menuselect "^H" undo
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
-
-export KEYTIMEOUT=1
