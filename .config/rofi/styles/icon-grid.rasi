@@ -1,7 +1,7 @@
 /****----	COLORSCHEME AND FONTS	----****/
 * {
-    font: 				"sans semi-bold 20";
-    background-color: 	transparent;
+	font: 				"sans semi-bold 20";
+	background-color: 	transparent;
 
 	bg-trans: 				#bb9af780;
 	bg-normal: 				#9d7cd8;
@@ -24,7 +24,6 @@ window {
 	border-color:			@fg-normal;
 	border:					0px;
     children: 				[ "mainbox" ];
-	width:					500px;
 }
 
 mainbox {
@@ -50,16 +49,16 @@ textbox-prompt-colon {
     padding:				0px 15px;
 	font:					"monospace 30";
     border-radius:			0px;
-    background-color:		inherit;
-    text-color:				inherit;
+    background-color:		@fg-normal;
+    text-color:				@bg-normal;
 }
 
 prompt {
     enabled:                false;
     vertical-align:         0.5;
     horizontal-align:       0.5;
-    background-color:       inherit;
-    text-color:             inherit;
+    background-color:       @fg-normal;
+    text-color:             @bg-normal;
 }
 
 entry {
@@ -71,41 +70,7 @@ entry {
     text-color:				inherit;
     cursor:					text;
     placeholder:			"Search...";
-    placeholder-color:		@fg-normal;
-}
-
-/****----	LIST OF ELEMENTS	----****/
-listview {
-	padding: 				10px 0px 0px 0px;
-    lines: 					5;
-}
-
-element {
-    border-radius: 			20px;
-    color: 					@fg-normal;
-    font:					inherit;
-	children:				[element-icon, element-text ];
-}
-
-element-icon {
-	size: 50px;
-	padding: 10px;
-    vertical-align:         0.5;
-}
-
-element-text {
-	font:					inherit;
-    text-color:				inherit;
-    vertical-align:         0.5;
-}
-
-element selected.normal {
-    background-color:		@bg-selected;
-	text-color:				@fg-selected;
-}
-
-element normal urgent {
-    background-color:		@bg-normal;
+    placeholder-color:		@fg-lighter;
 }
 
 /****----	 MESSAGE	----****/
@@ -127,11 +92,44 @@ textbox {
 }
 
 textbox-custom {
-	enabled:				false;
+	enabled:				true;
     font:					"sans bold 40";
-    text-color:             @fg-normal;
-	content:				"PLACEHOLDER";
+    text-color:             @fg-selected;
+	content:				"Select icon";
     vertical-align:         0.5;
     horizontal-align:       0.0;
     expand:					false;
+}
+
+/****----	LIST OF ELEMENTS	----****/
+listview {
+	cycle:					false;
+	padding: 				10px 0px 0px 0px;
+    lines: 					10;
+	columns:				10;
+	flow:					horizontal;
+	fixed-columns:			true;
+}
+
+element {
+    border-radius: 			20px;
+    color: 					@fg-normal;
+    font:					"monospace 40";
+	children:				[ element-text ];
+}
+
+element-text {
+	font:					inherit;
+    text-color:				inherit;
+    vertical-align: 		0.5;
+    horizontal-align: 		0.7;
+}
+
+element selected.normal {
+    background-color:		@bg-selected;
+	text-color:				@fg-selected;
+}
+
+element normal urgent {
+    background-color:		@bg-normal;
 }

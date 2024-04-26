@@ -21,73 +21,33 @@ window {
 	background-color: 		@bg-trans;
     transparency: 			"real";
     border-radius: 			20px;
-	border-color:			@fg-normal;
 	border:					0px;
+	border-color:			@fg-normal;
     children: 				[ "mainbox" ];
-	width:					500px;
+	width:					750;
 }
 
 mainbox {
-    children: [ "textbox-custom", "message", "inputbar", "listview" ];
-}
-
-/****----	INPUT BAR	----****/
-inputbar {
-	enabled:				true;
-    color:					@bg-normal;
-	background-color:		@fg-normal;
-    padding:				10px;
-    border-radius:			20px;
-	children:				[ "prompt", "textbox-prompt-colon", "entry"];
-}
-
-textbox-prompt-colon {
-    enabled:				true;
-    expand:					false;
-    vertical-align:         0.5;
-    horizontal-align:       0.5;
-    str:					"󰌧";
-    padding:				0px 15px;
-	font:					"monospace 30";
-    border-radius:			0px;
-    background-color:		inherit;
-    text-color:				inherit;
-}
-
-prompt {
-    enabled:                false;
-    vertical-align:         0.5;
-    horizontal-align:       0.5;
-    background-color:       inherit;
-    text-color:             inherit;
-}
-
-entry {
-    enabled:				true;
-	padding:				0px 15px;
-    vertical-align:         0.5;
-    horizontal-align:       0.0;
-    background-color:		inherit;
-    text-color:				inherit;
-    cursor:					text;
-    placeholder:			"Search...";
-    placeholder-color:		@fg-normal;
+    children: [ "textbox-custom", "message", "listview" ];
 }
 
 /****----	LIST OF ELEMENTS	----****/
 listview {
+	enabled:				true;
 	padding: 				10px 0px 0px 0px;
-    lines: 					5;
+	lines:					5;
 }
 
 element {
     border-radius: 			20px;
     color: 					@fg-normal;
     font:					inherit;
+	padding: 10px;
 	children:				[element-icon, element-text ];
 }
 
 element-icon {
+	enabled:				false;
 	size: 50px;
 	padding: 10px;
     vertical-align:         0.5;
@@ -100,6 +60,7 @@ element-text {
 }
 
 element selected.normal {
+	enabled:				false;
     background-color:		@bg-selected;
 	text-color:				@fg-selected;
 }
@@ -111,8 +72,9 @@ element normal urgent {
 /****----	 MESSAGE	----****/
 message {
     enabled:                true;
-    margin:                 0px;
     padding:                10px;
+    vertical-align:         0.5;
+    horizontal-align:       0.5;
     expand:					false;
 }
 
@@ -127,9 +89,10 @@ textbox {
 }
 
 textbox-custom {
-	enabled:				false;
+	enabled:				true;
+	markup:					true;
     font:					"sans bold 40";
-    text-color:             @fg-normal;
+    text-color:             @fg-selected;
 	content:				"PLACEHOLDER";
     vertical-align:         0.5;
     horizontal-align:       0.0;

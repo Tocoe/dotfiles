@@ -4,7 +4,7 @@
 # Once the user has selected an icon, it dumps it to STDOUT.
 
 # File with all nerd icons tab seperated by their names
-icons="$HOME/.local/bin/nerdicons.txt"
+icons="$HOME/.local/share/nerdicons.txt"
 
 ## Opens rofi prompt with all nerd icons
 rofi_cmd () {
