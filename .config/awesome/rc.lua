@@ -265,17 +265,17 @@ globalkeys = gears.table.join(
 
 	-- System Controls
 	awful.key({}, "#121", function () awful.util.spawn("amixer -D pulse sset Master toggle") end,
-			  {description = "Mute/unmute master audio output", group = "system"}),
+			  {description = "mute/unmute master audio output", group = "system"}),
 	awful.key({}, "#122", function () awful.util.spawn("amixer -D pulse sset Master 5%-") end,
-			  {description = "Decrease volume by 5%", group = "system"}),
+			  {description = "decrease volume by 5%", group = "system"}),
 	awful.key({}, "#123", function () awful.util.spawn("amixer -D pulse sset Master 5%+") end,
-			  {description = "Increase volume by 5%", group = "system"}),
+			  {description = "increase volume by 5%", group = "system"}),
 	awful.key({}, "#198", function () awful.util.spawn("amixer -D pulse sset Capture toggle") end,
-			  {description = "Mute/unmute mic", group = "system"}),
+			  {description = "mute/unmute mic", group = "system"}),
 	awful.key({}, "#232", function () awful.util.spawn("xbacklight -dec 10") end,
-			  {description = "Decrease backlight brightness by 10%", group = "system"}),
+			  {description = "decrease backlight brightness by 10%", group = "system"}),
 	awful.key({}, "#233", function () awful.util.spawn("xbacklight -inc 10") end,
-			  {description = "Increase backlight brightness by 10%", group = "system"}),
+			  {description = "increase backlight brightness by 10%", group = "system"}),
 
     -- Prompt
     awful.key({ modkey },            "r",     function () awful.spawn("rofi -show drun") end,
@@ -290,14 +290,17 @@ globalkeys = gears.table.join(
 			  {description = "open browser", group = "applications"}),
 	awful.key({ modkey,			  }, "n", function () awful.spawn(editor_cmd) end,
 			  {description = "open editor", group = "applications"}),
+	awful.key({ modkey,			  }, "Delete", function ()
+		awful.spawn(terminal .. " -e gtop", { callback = function () awful.spawn(terminal .. " -e htop") end,})
+	end, {description = "open gtop and htop", group = "applications"}),
 
 	-- Shell Scripts
 	awful.key({ modkey, "Shift" }, "b", function () awful.util.spawn("bookmark-add") end,
-			  {description = "Add web bookmark", group = "scripts"}),
+			  {description = "add web bookmark", group = "scripts"}),
 	awful.key({ modkey,			}, "b", function () awful.util.spawn("bookmark-get") end,
-			  {description = "Find web bookmark", group = "scripts"}),
+			  {description = "find web bookmark", group = "scripts"}),
 	awful.key({ modkey,			}, "e", function () awful.util.spawn("select-emoji") end,
-			  {description = "Insert Emoji", group = "scripts"}),
+			  {description = "insert Emoji", group = "scripts"}),
 
     -- Standard program
     awful.key({ modkey, "Control" }, "r", awesome.restart,

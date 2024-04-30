@@ -48,11 +48,11 @@ local augroup = vim.api.nvim_create_augroup		-- Create/get autocommand group
 local autocmd = vim.api.nvim_create_autocmd		-- Create autocommand
 
 -- Change opacity for kitty terminal only.
-autocmd('VimEnter', {	pattern = '',
-						command = "silent !if [ $KITTY_WINDOW_ID ]; then kitty @ --to $KITTY_LISTEN_ON set-background-opacity 1; fi"})
+-- autocmd('VimEnter', {	pattern = '',
+-- 						command = "silent !if [ $KITTY_WINDOW_ID ]; then kitty @ --to $KITTY_LISTEN_ON set-background-opacity 1; fi"})
 
-autocmd('VimLeave', {	pattern = '',
-						command = "silent !if [ $KITTY_WINDOW_ID ]; then kitty @ --to $KITTY_LISTEN_ON set-background-opacity 0.7; fi"})
+-- autocmd('VimLeave', {	pattern = '',
+-- 						command = "silent !if [ $KITTY_WINDOW_ID ]; then kitty @ --to $KITTY_LISTEN_ON set-background-opacity 0.7; fi"})
 
 -- Remove trailing whitespace on save
 autocmd('BufWritePre', {pattern = '', command = ":%s/\\s\\+$//e"})
