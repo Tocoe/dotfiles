@@ -2,7 +2,6 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
-
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -14,17 +13,16 @@ local lain = require("lain")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
 -- Dpi
-local dpi   = require("beautiful.xresources").apply_dpi
+local dpi = require("beautiful.xresources").apply_dpi
 -- }}}
 
--- {{{ Error handli
+-- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -107,32 +105,26 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
-
 -- {{{ Wibar
 -- Create a textclock widget
 local mytextclock = wibox.widget {
     format = ' %I:%M %P ',
     widget = wibox.widget.textclock
 }
+
 -- Battery Widget - Should probs move this to a seperate script -
-local markup     = lain.util.markup
+local markup = lain.util.markup
 
 local bat = lain.widget.bat({
     settings = function()
         bat_p = tonumber(bat_now.perc)
-
 		if (bat_p == nil) then bat_p = 0 end
-
 		local bat_icon = ""
 		if (bat_p > 85) then bat_icon = " "
 		elseif (bat_p > 60) then bat_icon = " "
 		elseif (bat_p > 40) then bat_icon = " "
 		elseif (bat_p > 20) then bat_icon = " "
 		else bat_icon = "! " end
-
         widget:set_markup(markup.font(beautiful.font, markup(beautiful.fg_normal, bat_icon .. "  ".. bat_p .. "% ")))
     end
 })
@@ -184,7 +176,6 @@ awful.screen.connect_for_each_screen(function(s)
 
 	local right_round = function (cr, width, height)
 		gears.shape.partially_rounded_rect(cr, width, height, true, false, false, true, 30)
-
 	end
 
     -- Create a taglist widget
@@ -251,8 +242,6 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    -- awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-    --           {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
@@ -299,14 +288,16 @@ globalkeys = gears.table.join(
               {description = "open Zathura", group = "applications"}),
 	awful.key({ modkey,			  }, "w", function () awful.util.spawn(browser) end,
 			  {description = "open browser", group = "applications"}),
-	awful.key({ modkey,			  }, "e", function () awful.spawn(editor_cmd) end,
+	awful.key({ modkey,			  }, "n", function () awful.spawn(editor_cmd) end,
 			  {description = "open editor", group = "applications"}),
 
 	-- Shell Scripts
 	awful.key({ modkey, "Shift" }, "b", function () awful.util.spawn("bookmark-add") end,
 			  {description = "Add web bookmark", group = "scripts"}),
 	awful.key({ modkey,			}, "b", function () awful.util.spawn("bookmark-get") end,
-			  {description = "Add web bookmark", group = "scripts"}),
+			  {description = "Find web bookmark", group = "scripts"}),
+	awful.key({ modkey,			}, "e", function () awful.util.spawn("select-emoji") end,
+			  {description = "Insert Emoji", group = "scripts"}),
 
     -- Standard program
     awful.key({ modkey, "Control" }, "r", awesome.restart,
@@ -329,33 +320,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
               {description = "select next", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
-              {description = "select previous", group = "layout"}),
-
-    awful.key({ modkey, "Control" }, "n",
-              function ()
-                  local c = awful.client.restore()
-                  -- Focus restored client
-                  if c then
-                    c:emit_signal(
-                        "request::activate", "key.unminimize", {raise = true}
-                    )
-                  end
-              end,
-              {description = "restore minimized", group = "client"}),
-
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"}),
-    -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "select previous", group = "layout"})
 )
 
 clientkeys = gears.table.join(
@@ -367,39 +332,10 @@ clientkeys = gears.table.join(
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ modkey, 	      }, "q",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
-              {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
-              {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
-              {description = "toggle keep on top", group = "client"}),
-    awful.key({ modkey,           }, "n",
-        function (c)
-            -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end ,
-        {description = "minimize", group = "client"}),
-    awful.key({ modkey,           }, "m",
-        function (c)
-            c.maximized = not c.maximized
-            c:raise()
-        end ,
-        {description = "(un)maximize", group = "client"}),
-    awful.key({ modkey, "Control" }, "m",
-        function (c)
-            c.maximized_vertical = not c.maximized_vertical
-            c:raise()
-        end ,
-        {description = "(un)maximize vertically", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "m",
-        function (c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c:raise()
-        end ,
-        {description = "(un)maximize horizontally", group = "client"})
+              {description = "toggle keep on top", group = "client"})
 )
 
 -- Bind all key numbers to tags.
@@ -507,10 +443,6 @@ awful.rules.rules = {
     { rule_any = {type = { "normal", "dialog" }
       }, properties = { titlebars_enabled = false }
     },
-
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
 }
 -- }}}
 
