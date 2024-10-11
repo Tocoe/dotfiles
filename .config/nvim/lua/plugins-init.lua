@@ -44,13 +44,11 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/nvim-cmp' -- Completion main plugin
 
 -- Match and search for Wilder
-Plug 'https://github.com/romgrk/fzy-lua-native'
-Plug 'https://github.com/nixprime/cpsm'
+Plug 'romgrk/fzy-lua-native'
+Plug 'nixprime/cpsm'
 
 Plug 'hrsh7th/cmp-nvim-lsp' -- Lsp completion
 Plug ('gelguy/wilder.nvim', { as = 'wilder', ['do'] = vim.fn['let &rtp=&rtp UpdateRemotePlugins']})	-- nicer custom wildmenu extension
-Plug ('roxma/nvim-yarp', { ['do']=vim.fn['pip install -r requirements.txt']})
-Plug 'roxma/vim-hug-neovim-rpc'
 
 -- LSP
 Plug 'neovim/nvim-lspconfig' -- Nvim official LSP config

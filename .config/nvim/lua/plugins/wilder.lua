@@ -4,7 +4,7 @@ wilder.setup({modes = {':', '/', '?'}})
 
 wilder.set_option('pipeline', {
 	wilder.branch(
-		wilder.python_file_finder_pipeline({
+			wilder.python_file_finder_pipeline({
 				file_command = function(ctx, arg)
 			    	if string.find(arg, '.') ~= nil then
 			    		return {'fd', '-tf', '-H'}
@@ -12,15 +12,21 @@ wilder.set_option('pipeline', {
 			        	return {'fd', '-tf'}
 			        end
 			    end,
-			    dir_command = {'fd', '-td', '-H'},
-			    filters = {'cpsm_filter'},
+			    dir_command = function(ctx, arg)
+			    	if string.find(arg, '.') ~= nil then
+			    		return {'fd', '-td', '-H'}
+			        else
+			        	return {'fd', '-td'}
+			        end
+				end,
+				filters = {'cpsm_filter'},
 			}),
 
 			wilder.substitute_pipeline({
 				pipeline = wilder.python_search_pipeline({
 					skip_cmdtype_check = 1,
 					pattern = wilder.python_fuzzy_pattern({
-					start_at_boundary = 0,
+						start_at_boundary = 0,
 					})
 				})
 			}),
@@ -30,11 +36,17 @@ wilder.set_option('pipeline', {
 				fuzzy_filter = wilder.lua_fzy_filter(),
 			}),
     		{
-    		  wilder.check(function(ctx, x) return x == '' end),
-    		  wilder.history(),
-    		}
-		)
-	})
+    		wilder.check(function(ctx, x) return x == '' end),
+    		wilder.history(),
+    		},
+			wilder.python_search_pipeline({
+				pattern = wilder.python_fuzzy_pattern({
+			        start_at_boundary = 0,
+				}),
+			})
+		),
+})
+
 
 wilder.setup {
 	next_key = "<C-j>",
@@ -45,8 +57,8 @@ wilder.setup {
 }
 
 local highlighters = {
-	wilder.lua_fzy_highlighter(),
 	wilder.pcre2_highlighter(),
+	wilder.lua_fzy_highlighter(),
 }
 
 wilder.set_option("renderer", wilder.popupmenu_renderer(

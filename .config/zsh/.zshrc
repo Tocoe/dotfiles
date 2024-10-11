@@ -106,7 +106,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export KEYTIMEOUT=1
 
-# A few bindkeys for MY CTRL-hjkl vimlike suggestion navigation
+# A few bindkeys for CTRL-hjkl vimlike suggestion navigation
 bindkey -M viins -r "^K"
 bindkey -M viins -r "^J"
 bindkey -M viins -r "^H"

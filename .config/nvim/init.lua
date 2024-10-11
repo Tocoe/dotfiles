@@ -70,4 +70,3 @@ autocmd({'WinEnter', 'BufLeave'}, {pattern = 'term://*', command = 'startinsert'
 
 -- Reload after saving configs
 autocmd('BufWritePost', {pattern = {'Xresources','Xdefaults','xresources','xdefaults'}, command = '!xrdb %'})
-
